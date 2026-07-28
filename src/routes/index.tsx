@@ -4,6 +4,7 @@ import heroImg from "@/assets/hero-kefir.jpg";
 import { getFeatured } from "@/content/products";
 import { posts } from "@/content/posts";
 import { ProductCard } from "@/components/site/ProductCard";
+import { ProductImage } from "@/components/site/ProductImage";
 
 export const Route = createFileRoute("/")({
   head: () => ({
