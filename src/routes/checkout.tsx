@@ -14,9 +14,31 @@ export const Route = createFileRoute("/checkout")({
   component: Checkout,
 });
 
+const SHIPPING_METHODS = [
+  {
+    id: "pudo",
+    name: "PUDO Locker-to-Locker",
+    description: "Nationwide PUDO locker network — collect from any PUDO locker in SA.",
+    eta: "2–4 working days",
+    price: 60,
+  },
+  {
+    id: "courier-guy",
+    name: "The Courier Guy — Door-to-Door",
+    description: "Insulated door-to-door courier delivery anywhere in South Africa.",
+    eta: "1–3 working days",
+    price: 120,
+  },
+] as const;
+
+type ShippingId = (typeof SHIPPING_METHODS)[number]["id"];
+
 function Checkout() {
   const { detailed, subtotal, clear } = useCart();
   const [placed, setPlaced] = useState(false);
+  const [shipping, setShipping] = useState<ShippingId>("pudo");
+  const shippingMethod = SHIPPING_METHODS.find((m) => m.id === shipping)!;
+  const total = subtotal + shippingMethod.price;
 
   if (placed) {
     return (
