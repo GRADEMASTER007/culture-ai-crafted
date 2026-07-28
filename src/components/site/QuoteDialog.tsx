@@ -18,8 +18,14 @@ const schema = z.object({
     .regex(/^[+0-9 ()\-]+$/, "Digits, spaces, +, -, () only"),
   address: z.string().trim().min(6, "Delivery address required").max(400),
   products: z.string().trim().min(3, "List products / quantities").max(1500),
+  shipping: z.enum(["pudo", "courier-guy"]),
   notes: z.string().trim().max(800).optional().or(z.literal("")),
 });
+
+const SHIPPING_LABEL: Record<"pudo" | "courier-guy", string> = {
+  pudo: "PUDO Locker-to-Locker (R60, 2–4 working days)",
+  "courier-guy": "The Courier Guy — Door-to-Door (R120, 1–3 working days)",
+};
 
 type FormState = z.infer<typeof schema>;
 type Errors = Partial<Record<keyof FormState, string>>;
@@ -37,6 +43,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
     phone: "",
     address: "",
     products: cartSummary || "",
+    shipping: "pudo",
     notes: "",
   });
   const [errors, setErrors] = useState<Errors>({});
@@ -84,6 +91,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
       `Email:   ${d.email}`,
       `Phone:   ${d.phone}`,
       `Address: ${d.address}`,
+      `Shipping method: ${SHIPPING_LABEL[d.shipping]}`,
       "",
       "Products / quantities requested:",
       d.products,
@@ -208,6 +216,33 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
               className="w-full rounded-xl border border-border bg-card px-4 py-2.5 font-mono text-sm text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               required
             />
+          </Field>
+
+          <Field label="Preferred shipping method">
+            <div className="grid gap-2 sm:grid-cols-2">
+              {(Object.keys(SHIPPING_LABEL) as (keyof typeof SHIPPING_LABEL)[]).map((id) => {
+                const active = form.shipping === id;
+                return (
+                  <label
+                    key={id}
+                    className={`flex cursor-pointer items-start gap-2 rounded-xl border p-3 text-xs transition ${
+                      active
+                        ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                        : "border-border hover:border-primary/50"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="quote-shipping"
+                      checked={active}
+                      onChange={() => set("shipping", id)}
+                      className="mt-0.5 h-4 w-4 accent-primary"
+                    />
+                    <span className="font-medium text-foreground">{SHIPPING_LABEL[id]}</span>
+                  </label>
+                );
+              })}
+            </div>
           </Field>
 
           <Field label="Additional notes (optional)" error={errors.notes}>

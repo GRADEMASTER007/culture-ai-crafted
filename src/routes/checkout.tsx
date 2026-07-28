@@ -14,9 +14,31 @@ export const Route = createFileRoute("/checkout")({
   component: Checkout,
 });
 
+const SHIPPING_METHODS = [
+  {
+    id: "pudo",
+    name: "PUDO Locker-to-Locker",
+    description: "Nationwide PUDO locker network — collect from any PUDO locker in SA.",
+    eta: "2–4 working days",
+    price: 60,
+  },
+  {
+    id: "courier-guy",
+    name: "The Courier Guy — Door-to-Door",
+    description: "Insulated door-to-door courier delivery anywhere in South Africa.",
+    eta: "1–3 working days",
+    price: 120,
+  },
+] as const;
+
+type ShippingId = (typeof SHIPPING_METHODS)[number]["id"];
+
 function Checkout() {
   const { detailed, subtotal, clear } = useCart();
   const [placed, setPlaced] = useState(false);
+  const [shipping, setShipping] = useState<ShippingId>("pudo");
+  const shippingMethod = SHIPPING_METHODS.find((m) => m.id === shipping)!;
+  const total = subtotal + shippingMethod.price;
 
   if (placed) {
     return (
@@ -79,6 +101,45 @@ function Checkout() {
           </div>
 
           <div className="rounded-2xl border border-border/60 bg-card p-6">
+            <h2 className="font-display text-2xl text-foreground">Shipping method</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Choose how you'd like your live cultures delivered anywhere in South Africa.
+            </p>
+            <div className="mt-4 grid gap-3">
+              {SHIPPING_METHODS.map((m) => {
+                const active = shipping === m.id;
+                return (
+                  <label
+                    key={m.id}
+                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
+                      active
+                        ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                        : "border-border hover:border-primary/50"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="shipping"
+                      value={m.id}
+                      checked={active}
+                      onChange={() => setShipping(m.id)}
+                      className="mt-1 h-4 w-4 accent-primary"
+                    />
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <span className="font-semibold text-foreground">{m.name}</span>
+                        <span className="font-display text-lg text-primary">{zar(m.price)}</span>
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">{m.description}</p>
+                      <p className="mt-1 text-xs font-medium text-foreground/70">ETA: {m.eta}</p>
+                    </div>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card p-6">
             <h2 className="font-display text-2xl text-foreground">Payment</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Yoco, PayFast and PayPal integrations are being finalised. Place your order and we'll email a secure
@@ -102,9 +163,19 @@ function Checkout() {
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex justify-between border-t border-border pt-4 text-lg">
-            <span className="font-medium text-foreground">Total</span>
-            <span className="font-display text-2xl text-primary">{zar(subtotal)}</span>
+          <div className="mt-4 space-y-2 border-t border-border pt-4 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Subtotal</span>
+              <span className="font-medium text-foreground">{zar(subtotal)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Shipping — {shippingMethod.name}</span>
+              <span className="font-medium text-foreground">{zar(shippingMethod.price)}</span>
+            </div>
+            <div className="flex justify-between border-t border-border pt-3 text-lg">
+              <span className="font-medium text-foreground">Total</span>
+              <span className="font-display text-2xl text-primary">{zar(total)}</span>
+            </div>
           </div>
           <button className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-glow">
             Place order
