@@ -128,7 +128,7 @@ function ProductPage() {
           <div className="mt-10">
             <h2 className="font-display text-2xl text-foreground">Frequently asked</h2>
             <div className="mt-4 divide-y divide-border">
-              {product.faq.map((f) => (
+              {product.faq.map((f: { q: string; a: string }) => (
                 <details key={f.q} className="group py-3">
                   <summary className="cursor-pointer list-none font-medium text-foreground marker:hidden">
                     {f.q}

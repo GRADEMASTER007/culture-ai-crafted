@@ -103,7 +103,7 @@ function Post() {
       <section className="mt-14 rounded-2xl border border-border/60 bg-card p-6">
         <h2 className="font-display text-2xl text-foreground">FAQ</h2>
         <div className="mt-4 divide-y divide-border">
-          {post.faq.map((f) => (
+          {post.faq.map((f: { q: string; a: string }) => (
             <details key={f.q} className="py-3">
               <summary className="cursor-pointer font-medium text-foreground marker:hidden">{f.q}</summary>
               <p className="mt-2 text-sm text-muted-foreground">{f.a}</p>
