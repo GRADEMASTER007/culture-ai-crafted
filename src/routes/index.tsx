@@ -4,6 +4,7 @@ import heroImg from "@/assets/hero-kefir.jpg";
 import { getFeatured } from "@/content/products";
 import { posts } from "@/content/posts";
 import { ProductCard } from "@/components/site/ProductCard";
+import { ProductImage } from "@/components/site/ProductImage";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -176,8 +177,8 @@ function Home() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {featured.slice(0, 4).map((p) => (
-              <div key={p.sku} className="overflow-hidden rounded-2xl">
-                <img src={p.image} alt={p.imageAlt} loading="lazy" className="h-full w-full object-cover" />
+              <div key={p.sku} className="aspect-square overflow-hidden rounded-2xl">
+                <ProductImage product={p} />
               </div>
             ))}
           </div>

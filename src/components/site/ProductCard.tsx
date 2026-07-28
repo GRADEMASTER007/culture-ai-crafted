@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { Product } from "@/content/products";
 import { zar } from "@/lib/format";
+import { ProductImage } from "./ProductImage";
 
 export function ProductCard({ product }: { product: Product }) {
   const price = product.salePrice ?? product.price;
@@ -11,10 +12,8 @@ export function ProductCard({ product }: { product: Product }) {
       className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10"
     >
       <div className="aspect-square overflow-hidden bg-muted">
-        <img
-          src={product.image}
-          alt={product.imageAlt}
-          loading="lazy"
+        <ProductImage
+          product={product}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
       </div>
