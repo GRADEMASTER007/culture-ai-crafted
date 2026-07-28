@@ -163,9 +163,19 @@ function Checkout() {
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex justify-between border-t border-border pt-4 text-lg">
-            <span className="font-medium text-foreground">Total</span>
-            <span className="font-display text-2xl text-primary">{zar(subtotal)}</span>
+          <div className="mt-4 space-y-2 border-t border-border pt-4 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Subtotal</span>
+              <span className="font-medium text-foreground">{zar(subtotal)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Shipping — {shippingMethod.name}</span>
+              <span className="font-medium text-foreground">{zar(shippingMethod.price)}</span>
+            </div>
+            <div className="flex justify-between border-t border-border pt-3 text-lg">
+              <span className="font-medium text-foreground">Total</span>
+              <span className="font-display text-2xl text-primary">{zar(total)}</span>
+            </div>
           </div>
           <button className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-glow">
             Place order
