@@ -101,6 +101,45 @@ function Checkout() {
           </div>
 
           <div className="rounded-2xl border border-border/60 bg-card p-6">
+            <h2 className="font-display text-2xl text-foreground">Shipping method</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Choose how you'd like your live cultures delivered anywhere in South Africa.
+            </p>
+            <div className="mt-4 grid gap-3">
+              {SHIPPING_METHODS.map((m) => {
+                const active = shipping === m.id;
+                return (
+                  <label
+                    key={m.id}
+                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
+                      active
+                        ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                        : "border-border hover:border-primary/50"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="shipping"
+                      value={m.id}
+                      checked={active}
+                      onChange={() => setShipping(m.id)}
+                      className="mt-1 h-4 w-4 accent-primary"
+                    />
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <span className="font-semibold text-foreground">{m.name}</span>
+                        <span className="font-display text-lg text-primary">{zar(m.price)}</span>
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">{m.description}</p>
+                      <p className="mt-1 text-xs font-medium text-foreground/70">ETA: {m.eta}</p>
+                    </div>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card p-6">
             <h2 className="font-display text-2xl text-foreground">Payment</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Yoco, PayFast and PayPal integrations are being finalised. Place your order and we'll email a secure
