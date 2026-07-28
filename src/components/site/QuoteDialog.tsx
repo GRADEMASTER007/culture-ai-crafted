@@ -91,6 +91,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
       `Email:   ${d.email}`,
       `Phone:   ${d.phone}`,
       `Address: ${d.address}`,
+      `Shipping method: ${SHIPPING_LABEL[d.shipping]}`,
       "",
       "Products / quantities requested:",
       d.products,
