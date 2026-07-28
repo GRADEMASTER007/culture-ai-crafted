@@ -143,7 +143,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
                 onChange={(e) => set("firstName", e.target.value)}
                 maxLength={60}
                 autoComplete="given-name"
-                className="input"
+                className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                 required
               />
             </Field>
@@ -154,7 +154,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
                 onChange={(e) => set("lastName", e.target.value)}
                 maxLength={60}
                 autoComplete="family-name"
-                className="input"
+                className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                 required
               />
             </Field>
@@ -165,7 +165,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
                 onChange={(e) => set("email", e.target.value)}
                 maxLength={160}
                 autoComplete="email"
-                className="input"
+                className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                 required
               />
             </Field>
@@ -176,7 +176,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
                 onChange={(e) => set("phone", e.target.value)}
                 maxLength={24}
                 autoComplete="tel"
-                className="input"
+                className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                 required
               />
             </Field>
@@ -189,7 +189,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
               maxLength={400}
               rows={2}
               autoComplete="street-address"
-              className="input"
+              className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               placeholder="Street, suburb, city, postal code, province"
               required
             />
@@ -205,7 +205,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
               onChange={(e) => set("products", e.target.value)}
               maxLength={1500}
               rows={5}
-              className="input font-mono text-sm"
+              className="w-full rounded-xl border border-border bg-card px-4 py-2.5 font-mono text-sm text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               required
             />
           </Field>
@@ -216,7 +216,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
               onChange={(e) => set("notes", e.target.value)}
               maxLength={800}
               rows={2}
-              className="input"
+              className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               placeholder="Delivery date, business name, VAT number, etc."
             />
           </Field>
