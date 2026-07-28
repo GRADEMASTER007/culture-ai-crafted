@@ -218,6 +218,33 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
             />
           </Field>
 
+          <Field label="Preferred shipping method">
+            <div className="grid gap-2 sm:grid-cols-2">
+              {(Object.keys(SHIPPING_LABEL) as (keyof typeof SHIPPING_LABEL)[]).map((id) => {
+                const active = form.shipping === id;
+                return (
+                  <label
+                    key={id}
+                    className={`flex cursor-pointer items-start gap-2 rounded-xl border p-3 text-xs transition ${
+                      active
+                        ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                        : "border-border hover:border-primary/50"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="quote-shipping"
+                      checked={active}
+                      onChange={() => set("shipping", id)}
+                      className="mt-0.5 h-4 w-4 accent-primary"
+                    />
+                    <span className="font-medium text-foreground">{SHIPPING_LABEL[id]}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </Field>
+
           <Field label="Additional notes (optional)" error={errors.notes}>
             <textarea
               value={form.notes ?? ""}
