@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ChevronRight, Truck, ShieldCheck, Sparkles } from "lucide-react";
 import { getProduct, getRelated } from "@/content/products";
 import { ProductCard } from "@/components/site/ProductCard";
+import { ProductImage } from "@/components/site/ProductImage";
 import { zar } from "@/lib/format";
 import { useCart } from "@/lib/cart";
 import { useState } from "react";
