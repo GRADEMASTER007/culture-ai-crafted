@@ -1615,6 +1615,15 @@ export const products: Product[] = [
   },
 ];
 
+import chlorellaImg from "@/assets/chlorella-vulgaris.png.asset.json";
+import spirulinaImg from "@/assets/spirulina-platensis.png.asset.json";
+
+for (const p of products) {
+  if (p.image) continue;
+  if (/spirulina/i.test(p.name)) p.image = spirulinaImg.url;
+  else if (/chlorella/i.test(p.name)) p.image = chlorellaImg.url;
+}
+
 export const featuredProducts = products.slice(0, 8);
 
 export function getProduct(slug: string): Product | undefined {
