@@ -176,8 +176,8 @@ function Home() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {featured.slice(0, 4).map((p) => (
-              <div key={p.sku} className="overflow-hidden rounded-2xl">
-                <img src={p.image} alt={p.imageAlt} loading="lazy" className="h-full w-full object-cover" />
+              <div key={p.sku} className="aspect-square overflow-hidden rounded-2xl">
+                <ProductImage product={p} />
               </div>
             ))}
           </div>
