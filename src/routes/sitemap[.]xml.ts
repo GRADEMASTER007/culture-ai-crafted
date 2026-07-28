@@ -3,12 +3,15 @@ import type {} from "@tanstack/react-start";
 import { products } from "@/content/products";
 import { posts } from "@/content/posts";
 
-const BASE_URL = "";
-
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
-      GET: async () => {
+      GET: async ({ request }) => {
+        const url = new URL(request.url);
+        const host = url.host;
+        const BASE_URL = host.includes("livingculturehealth")
+          ? "https://livingculturehealth.company"
+          : `${url.protocol}//${host}`;
         const entries: { path: string; changefreq?: string; priority?: string }[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/shop", changefreq: "weekly", priority: "0.9" },
