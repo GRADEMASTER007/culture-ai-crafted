@@ -135,6 +135,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(orgJsonLd) },
       { type: "application/ld+json", children: JSON.stringify(websiteJsonLd) },
+      {
+        children: `(function(){try{var h=location.hostname;var isLC=h.indexOf('livingculturehealth')!==-1;var GTM=isLC?'GTM-NMHN6F7P':'GTM-PJ4S224L';var GA=isLC?'G-D4NQCVMS98':'G-V0DEMTMBEZ';(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',GTM);var ga=document.createElement('script');ga.async=true;ga.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(ga);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);window.__GTM_ID__=GTM;var n=document.createElement('noscript');var i=document.createElement('iframe');i.src='https://www.googletagmanager.com/ns.html?id='+GTM;i.height='0';i.width='0';i.style.display='none';i.style.visibility='hidden';n.appendChild(i);document.body.insertBefore(n,document.body.firstChild);}catch(e){}})();`,
+      },
     ],
   }),
   shellComponent: RootShell,
