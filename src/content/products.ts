@@ -1616,3 +1616,22 @@ export const products: Product[] = [
 ];
 
 export const featuredProducts = products.slice(0, 8);
+
+export function getProduct(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug);
+}
+
+export function getRelated(slug: string, limit = 4): Product[] {
+  const product = getProduct(slug);
+  if (!product) return products.slice(0, limit);
+  const related = products.filter(
+    (p) => p.slug !== slug && p.category === product.category,
+  );
+  return related.slice(0, limit);
+}
+
+export function getFeatured(limit = 8): Product[] {
+  return products.filter((p) => p.featured).length
+    ? products.filter((p) => p.featured).slice(0, limit)
+    : products.slice(0, limit);
+}
