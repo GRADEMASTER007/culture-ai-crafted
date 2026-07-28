@@ -81,8 +81,8 @@ function ProductPage() {
       </nav>
 
       <div className="mt-8 grid gap-12 lg:grid-cols-2">
-        <div className="overflow-hidden rounded-3xl border border-border/60 bg-card">
-          <img src={product.image} alt={product.imageAlt} className="h-full w-full object-cover" />
+        <div className="aspect-square overflow-hidden rounded-3xl border border-border/60 bg-card">
+          <ProductImage product={product} />
         </div>
         <div>
           <div className="text-xs uppercase tracking-[0.2em] text-primary">{product.brand}</div>
