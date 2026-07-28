@@ -43,6 +43,7 @@ export function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => v
     phone: "",
     address: "",
     products: cartSummary || "",
+    shipping: "pudo",
     notes: "",
   });
   const [errors, setErrors] = useState<Errors>({});
