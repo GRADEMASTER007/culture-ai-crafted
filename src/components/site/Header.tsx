@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X, FileText } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/lib/cart";
+import { QuoteDialog } from "./QuoteDialog";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -14,10 +15,11 @@ const nav = [
 export function Header() {
   const { count } = useCart();
   const [open, setOpen] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-lg">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center gap-2 text-primary" onClick={() => setOpen(false)}>
           <span className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground font-display text-lg">
             L
@@ -41,6 +43,19 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setQuoteOpen(true)}
+            className="hidden items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground shadow-sm transition hover:bg-accent/90 sm:inline-flex"
+          >
+            <FileText className="h-4 w-4" /> Request Quotation
+          </button>
+          <button
+            onClick={() => setQuoteOpen(true)}
+            aria-label="Request Quotation"
+            className="grid h-10 w-10 place-items-center rounded-full bg-accent text-accent-foreground hover:bg-accent/90 sm:hidden"
+          >
+            <FileText className="h-5 w-5" />
+          </button>
           <Link
             to="/cart"
             className="relative grid h-10 w-10 place-items-center rounded-full text-foreground hover:bg-muted"
@@ -75,9 +90,19 @@ export function Header() {
                 {n.label}
               </Link>
             ))}
+            <button
+              onClick={() => {
+                setOpen(false);
+                setQuoteOpen(true);
+              }}
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground"
+            >
+              <FileText className="h-4 w-4" /> Request Quotation
+            </button>
           </nav>
         </div>
       )}
+      <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </header>
   );
 }
