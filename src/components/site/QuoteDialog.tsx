@@ -18,8 +18,14 @@ const schema = z.object({
     .regex(/^[+0-9 ()\-]+$/, "Digits, spaces, +, -, () only"),
   address: z.string().trim().min(6, "Delivery address required").max(400),
   products: z.string().trim().min(3, "List products / quantities").max(1500),
+  shipping: z.enum(["pudo", "courier-guy"]),
   notes: z.string().trim().max(800).optional().or(z.literal("")),
 });
+
+const SHIPPING_LABEL: Record<"pudo" | "courier-guy", string> = {
+  pudo: "PUDO Locker-to-Locker (R60, 2–4 working days)",
+  "courier-guy": "The Courier Guy — Door-to-Door (R120, 1–3 working days)",
+};
 
 type FormState = z.infer<typeof schema>;
 type Errors = Partial<Record<keyof FormState, string>>;
