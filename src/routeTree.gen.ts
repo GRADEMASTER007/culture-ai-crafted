@@ -15,6 +15,7 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CommunityGuidelinesRouteImport } from './routes/community-guidelines'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -52,6 +53,11 @@ const CookiesRoute = CookiesRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityGuidelinesRoute = CommunityGuidelinesRouteImport.update({
+  id: '/community-guidelines',
+  path: '/community-guidelines',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/community-guidelines': typeof CommunityGuidelinesRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/privacy': typeof PrivacyRoute
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/community-guidelines': typeof CommunityGuidelinesRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/privacy': typeof PrivacyRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/community-guidelines': typeof CommunityGuidelinesRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/privacy': typeof PrivacyRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/cart'
     | '/checkout'
+    | '/community-guidelines'
     | '/contact'
     | '/cookies'
     | '/privacy'
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/cart'
     | '/checkout'
+    | '/community-guidelines'
     | '/contact'
     | '/cookies'
     | '/privacy'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/cart'
     | '/checkout'
+    | '/community-guidelines'
     | '/contact'
     | '/cookies'
     | '/privacy'
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  CommunityGuidelinesRoute: typeof CommunityGuidelinesRoute
   ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community-guidelines': {
+      id: '/community-guidelines'
+      path: '/community-guidelines'
+      fullPath: '/community-guidelines'
+      preLoaderRoute: typeof CommunityGuidelinesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -339,6 +359,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  CommunityGuidelinesRoute: CommunityGuidelinesRoute,
   ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
   PrivacyRoute: PrivacyRoute,
