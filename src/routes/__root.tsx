@@ -175,6 +175,7 @@ function RootComponent() {
           <Footer />
         </div>
         <ChatWidget />
+        <CookieConsent />
       </CartProvider>
     </QueryClientProvider>
   );
