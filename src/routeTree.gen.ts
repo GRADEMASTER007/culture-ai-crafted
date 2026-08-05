@@ -13,6 +13,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as FacebookDataDeletionRouteImport } from './routes/facebook-data-deletion'
 import { Route as CopyrightRouteImport } from './routes/copyright'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -44,6 +45,11 @@ const ShopRoute = ShopRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FacebookDataDeletionRoute = FacebookDataDeletionRouteImport.update({
+  id: '/facebook-data-deletion',
+  path: '/facebook-data-deletion',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CopyrightRoute = CopyrightRouteImport.update({
@@ -117,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/copyright': typeof CopyrightRoute
+  '/facebook-data-deletion': typeof FacebookDataDeletionRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -135,6 +142,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/copyright': typeof CopyrightRoute
+  '/facebook-data-deletion': typeof FacebookDataDeletionRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -154,6 +162,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/copyright': typeof CopyrightRoute
+  '/facebook-data-deletion': typeof FacebookDataDeletionRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -174,6 +183,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/copyright'
+    | '/facebook-data-deletion'
     | '/privacy'
     | '/shop'
     | '/sitemap.xml'
@@ -192,6 +202,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/copyright'
+    | '/facebook-data-deletion'
     | '/privacy'
     | '/shop'
     | '/sitemap.xml'
@@ -210,6 +221,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/copyright'
+    | '/facebook-data-deletion'
     | '/privacy'
     | '/shop'
     | '/sitemap.xml'
@@ -229,6 +241,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
   CopyrightRoute: typeof CopyrightRoute
+  FacebookDataDeletionRoute: typeof FacebookDataDeletionRoute
   PrivacyRoute: typeof PrivacyRoute
   ShopRoute: typeof ShopRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -264,6 +277,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/facebook-data-deletion': {
+      id: '/facebook-data-deletion'
+      path: '/facebook-data-deletion'
+      fullPath: '/facebook-data-deletion'
+      preLoaderRoute: typeof FacebookDataDeletionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/copyright': {
@@ -383,6 +403,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
   CopyrightRoute: CopyrightRoute,
+  FacebookDataDeletionRoute: FacebookDataDeletionRoute,
   PrivacyRoute: PrivacyRoute,
   ShopRoute: ShopRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
