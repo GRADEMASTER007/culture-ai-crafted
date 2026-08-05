@@ -15,6 +15,7 @@ import { CartProvider } from "@/lib/cart";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatWidget } from "@/components/site/ChatWidget";
+import { CookieConsent } from "@/components/site/CookieConsent";
 
 const orgJsonLd = {
   "@context": "https://schema.org",
