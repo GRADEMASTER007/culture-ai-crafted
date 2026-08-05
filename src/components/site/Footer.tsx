@@ -1,12 +1,21 @@
 import { Link } from "@tanstack/react-router";
 
+const legalLinks = [
+  { to: "/privacy", label: "Privacy Policy" },
+  { to: "/terms", label: "Terms of Service" },
+  { to: "/cookies", label: "Cookie Policy" },
+  { to: "/community-guidelines", label: "Community Guidelines" },
+  { to: "/copyright", label: "Copyright Policy" },
+  { to: "/facebook-data-deletion", label: "Facebook Data Deletion" },
+] as const;
+
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-border/60 bg-primary text-primary-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4 lg:px-8">
-        <div>
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:grid-cols-2 lg:grid-cols-5 lg:px-8">
+        <div className="sm:col-span-2 lg:col-span-2">
           <div className="font-display text-2xl">Living Culture Health</div>
-          <p className="mt-3 text-sm text-primary-foreground/80">
+          <p className="mt-3 max-w-sm text-sm text-primary-foreground/80">
             Premium live cultures & fermentation supplies from South Africa. Shipped nationwide across Africa and beyond.
           </p>
         </div>
@@ -28,17 +37,24 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="font-display text-lg">Contact</h4>
-          <address className="mt-3 space-y-2 text-sm not-italic text-primary-foreground/80">
-            <div>South Africa</div>
-            <div>hello@livingculturehealth.co.za</div>
-            <div>+27 (0) 00 000 0000</div>
-          </address>
+          <h4 className="font-display text-lg">Legal</h4>
+          <ul className="mt-3 space-y-2 text-sm text-primary-foreground/80">
+            {legalLinks.map((l) => (
+              <li key={l.to}>
+                <Link to={l.to} className="hover:text-accent">{l.label}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <div className="border-t border-primary-foreground/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-primary-foreground/60 sm:flex-row sm:px-6 lg:px-8">
-          <div>© {new Date().getFullYear()} Living Culture Health. All rights reserved.</div>
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-xs text-primary-foreground/60 sm:flex-row sm:px-6 lg:px-8">
+          <div className="text-center sm:text-left">
+            <div>© {new Date().getFullYear()} Living Culture Health. All rights reserved.</div>
+            <div className="mt-1">
+              <a href="mailto:orders@proagrisa.co.za" className="hover:text-accent">orders@proagrisa.co.za</a> · South Africa
+            </div>
+          </div>
           <div>Made with living cultures in South Africa.</div>
         </div>
       </div>
